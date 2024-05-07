@@ -72,11 +72,11 @@ app.delete('/recipes/:id', async(req, res) => {
         res.status(500).json({message: error.message});
     }
 })
-
+require('dotenv').config();
 // Establish connection to MongoDB database
 mongoose.set("strictQuery", false)
 mongoose
-.connect('mongodb+srv://root:recipe-api-project@cluster0.rbn5n63.mongodb.net/Recipes?retryWrites=true&w=majority&appName=Cluster0').then(() => {
+.connect(process.env.MONGODB_URI).then(() => {
     console.log("connection to MongoDB established")
     app.listen(3000, ()=> {
         console.log("Node API app is running on port 3000")
